@@ -1,41 +1,23 @@
 pipeline {
     agent any
-
     tools {
-        gradle 'gradle'  // This matches the name configured in Jenkins Global Tools
+        gradle 'Gradle-7'  // 🔥 Make sure this matches Global Tool name
     }
-
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'feature/login', url: 'https://github.com/TedlaHaneesh/devops-scenario1.git'
+                checkout scm
             }
         }
-
         stage('Build') {
             steps {
                 sh './gradlew clean build'
             }
         }
-
-        stage('Test') {
+        stage('Archive') {
             steps {
-                echo 'Running tests...'
-                // You can add additional testing steps here if needed
+                archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
             }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-                // You can add your deployment steps here
-            }
-        }
-    }
-
-    post {
-        always {
-            echo 'Cleaning up...'
         }
     }
 }
