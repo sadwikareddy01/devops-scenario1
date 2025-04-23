@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'feature/login', url: 'https://github.com/TedlaHaneesh/devops-scenario1.git'
+                git branch: 'feature/login', url: 'https://github.com/sadwikareddy01/devops-scenario1'
             }
         }
 
